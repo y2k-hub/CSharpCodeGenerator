@@ -1,2 +1,2 @@
-# CSharpCodeGenerator
+# EntityCodeGenerator
 MySQLのテーブル情報からエンティティクラスのコードを生成します。
