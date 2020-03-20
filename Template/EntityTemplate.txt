@@ -1,0 +1,7 @@
+public class _____CLASS_____ {
+	public _____CLASS_____() {
+	}
+
+_____MEMBERS_____
+}
+

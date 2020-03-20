@@ -1,0 +1,25 @@
+﻿@page "/myadmin"
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<iframe src="@myadminUrl" width="500" height="100">
+    この部分はインラインフレームを使用してます。
+</iframe>
+
+@code {
+    private int currentCount = 0;
+
+    private string myadminUrl;
+
+    protected override void OnInitialized() {
+        myadminUrl = "http://localhost:3030/db_structure.php?server=1&db=" + AppSettings.MySqlSettings.Database;
+    }
+
+    private void IncrementCount() {
+        currentCount++;
+    }
+}

@@ -1,0 +1,56 @@
+﻿@page "/entitygencsharp"
+
+@using System.Collections
+@using System.Collections.Generic
+@using EntityGenerator.Controller
+@using EntityGenerator.Data
+
+@inject EntityGenCSharpController Controller
+
+<RadzenTemplateForm Data="@viewData" Submit="@((EntityGenCSharpViewData args) => { Submit(args); })">
+    <div class="row">
+        <div class="col-md-10">
+            <RadzenFieldset Text="エンティティクラス自動作成">
+                <div class="row" style="margin-bottom: 20px">
+                    <div class="col-md-2 align-items-center d-flex">
+                        <RadzenLabel Text="テーブル名" />
+                    </div>
+                    <div class="col-md-4 d-flex">
+                        <RadzenTextBox @bind-Value="viewData.TableName" />
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 20px">
+                    <div class="col-md-6 d-flex">
+                    </div>
+                    <div class="col-md-6 d-flex">
+                        <RadzenButton ButtonType="ButtonType.Submit" Icon="autorenew" Text="実行" />
+                        <span style="margin-left: 20px">
+                            <button type="button" class="ui-button ui-button-md ui-widget ui-state-default ui-corner-all btn-primary" onclick="var textarea = document.getElementsByTagName('textarea')[0];textarea.select();document.execCommand('copy');">
+                                <i class="ui-button-icon-left pi">file_copy</i>
+                                <span class="ui-button-text">コピー</span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <RadzenTextArea Style="margin-bottom: 20px" Cols="90" Rows="30" @bind-Value="viewData.OutPut" Id="tamplate" />
+                    </div>
+                </div>
+            </RadzenFieldset>
+        </div>
+    </div>
+</RadzenTemplateForm>
+
+@code {
+
+    EntityGenCSharpViewData viewData = new EntityGenCSharpViewData();
+
+    protected override void OnInitialized() {
+    }
+
+    async Task Submit(EntityGenCSharpViewData arg) {
+        viewData = await Controller.GenerateCode(arg);
+    }
+
+}
